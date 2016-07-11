@@ -15,8 +15,9 @@ sudo apt-get install i2c-tools
 
 ### 1.1.2 enable i2c
 이용하기에 앞서 RPi에서 i2c 기능을 enable 시켜야한다.
+수정하는 방법은 크게 두가지가 있다
 
-#### 먼저 RPi내 환경설정을 이용해 변경하는 방법
+#### 1. RPi내 환경설정을 이용해 변경하는 방법
 ```bash
 sudo raspi-config
 ```
@@ -31,7 +32,7 @@ sudo raspi-config
 sudo reboot
 ```
 
-#### 수동으로 i2c 설정하는 방법
+#### 2. 수동으로 i2c 설정하는 방법
 RPi 공식 OS인 Raspbian 기준으로 설명하겠다.
 /etc/modules 파일을 수정해야 하는데 이 파일은 부팅시에 load할 모듈에 대한 이름을 가지고있다.
 이 과정은 아래 링크에서 확인할 수 있다.
@@ -45,11 +46,11 @@ sudo i2cdetect -y 1
 Raspberry Pi Model B 모델에서는 아래와 같이 0x40 와 0x70에 나온다.
 ![i2c5](https://cdn-learn.adafruit.com/assets/assets/000/003/055/medium800/learn_raspberry_pi_i2c-detect.png?1396790698)
 
-하지만 **RPi 3에서는 0x60 와 0x70**에 인식된다.
+#### 하지만 **RPi 3에서는 0x60 와 0x70**에 인식된다.
 
 ## 1.2 라이브러리 설치
 라이브러리를 쉽게 이용하기위해 **git**을 설치한다.
-현재경로에 **Adafruit-Motor-HAT-Python-Library** 폴더가 생성된다.
+현재경로에 **`Adafruit-Motor-HAT-Python-Library`** 폴더가 생성된다.
 설치 후 **Adafruit-Motor-HAT-Python-Library** 폴더로 이동한다
 
 ```bash
@@ -68,7 +69,35 @@ sudo python setup.py install
 ```
 
 ## 1.3 구동하기
-### 1.3.1 DC motor 
+
+지금까지를 간단하게 정리하면
+
+* 현재 모듈은 i2c address 0x60, 0x70으로 인식되어 있다.
+* 설치한 라이브러리는 python으로 작성되어있다 
+* 
+
+### 1.3.1 DC motor
+* DC motor만 사용한다면 4개까지 이용 가능하다
+* 한 블럭의 소켓들(블럭당 5개 소켓) 중 가운데 소켓은 사용하지 않는다
+* 라이브러리 내에서 각 모터에 대한 addressing은 아래와 같다
+![motor1](/img/그림1.png)
+위 이미지의 경우 모터에대한 주소가 **3번**이라고 볼 수 있다.
+
+구동에 대한 step-by-step 설명은 아래 링크에서 확인 할 수 있다.
+
+**https://github.com/Jesse-Back/rpi_demo/blob/dev/rpi3/DC_motor_demo.ipynb**
 
 ### 1.3.2 stepping motor 
+* Stepping motor만 사용한다면 2개까지 이용 가능하다
+* 한 블럭의 소켓들(블럭당 5개 소켓) 중 가운데 소켓은 사용하지 않는다
+* 라이브러리 내에서 각 모터에 대한 addressing은 아래와 같다
+
+![motor1](/img/그림2.png)
+
+위 이미지의 경우 모터에대한 주소가 **1번**이라고 볼 수 있다.
+
+구동에 대한 step-by-step 설명은 아래 링크에서 확인 할 수 있다.
+
+**https://github.com/Jesse-Back/rpi_demo/blob/dev/rpi3/Step_motor_demo.ipynb**
+
 
