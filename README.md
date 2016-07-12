@@ -4,7 +4,7 @@
 
 ## 1.1 기본설정
 
-### 1.1.1 i2c툴 설치
+### 1.1.1 i2c-tool 설치
 
 터미널에 다음을 입력
 
@@ -36,17 +36,19 @@ sudo reboot
 RPi 공식 OS인 Raspbian 기준으로 설명하겠다.
 /etc/modules 파일을 수정해야 하는데 이 파일은 부팅시에 load할 모듈에 대한 이름을 가지고있다.
 이 과정은 아래 링크에서 확인할 수 있다.
-> https://cdn-learn.adafruit.com/assets/assets/000/003/054/medium800/learn_raspberry_pi_editing_modules_file.png?1396790682
+> https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
 
 ### 1.1.3 확인하기
 장치가 잘 연결 되었는지 확인하기 위해서 아래 명령어를 이용한다.
+i2c adderess가 출력이 된다.
+
 ```bash
 sudo i2cdetect -y 1
 ```
-Raspberry Pi Model B 모델에서는 아래와 같이 0x40 와 0x70에 나온다.
+Raspberry Pi Model B 모델에서는 아래와 같이 0x40와 0x70에 인식된다.
 ![i2c5](https://cdn-learn.adafruit.com/assets/assets/000/003/055/medium800/learn_raspberry_pi_i2c-detect.png?1396790698)
 
-#### 하지만 **RPi 3에서는 0x60 와 0x70**에 인식된다.
+#### 하지만 우리가 사용할 **RPi 3에서는 0x60 와 0x70**로 인식된다.
 
 ## 1.2 라이브러리 설치
 라이브러리를 쉽게 이용하기위해 **git**을 설치한다.
